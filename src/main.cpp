@@ -25,7 +25,7 @@ int main()
 	sf::Sprite background;
 	sf::Texture backTexture;
 
-	Planet planet1(100, true), planet2(150, false);
+	Planet planet1(100, true), planet2(300, false);
 	planet1.m_Shape.setPosition(0.f, 0.f);
 	planet2.m_Shape.setPosition(WINDOWWIDTH / 2 - 75, WINDOWWIDTH / 2 - 75);
 
