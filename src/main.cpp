@@ -20,6 +20,7 @@ sf::Vector2f accGrav(Planet &first, Planet &second);
 int main()
 {
 	sf::RenderWindow window(sf::VideoMode(WINDOWWIDTH, WINDOWWIDTH), "Gravity Simulation!");
+	window.setFramerateLimit(30);
 	sf::Event event;
 	sf::Sprite background;
 	sf::Texture backTexture;
