@@ -20,7 +20,7 @@ sf::Vector2f accGrav(Planet &first, Planet &second);
 // Main game loop and initialization
 int main()
 {
-	sf::RenderWindow window(sf::VideoMode(WINDOWWIDTH, WINDOWWIDTH), "This Works!");
+	sf::RenderWindow window(sf::VideoMode(WINDOWWIDTH, WINDOWWIDTH), "Gravity Simulation!");
 	sf::Event event;
 	sf::Sprite background;
 	sf::Texture backTexture;

@@ -1,0 +1,5 @@
+# Ignore all object files
+
+build/*
+
+gravity-app
