@@ -13,13 +13,15 @@
 // of moon like object. aka, this is kg/m
 const double MOON_MASS_TO_RADIUS = 7.34767309e22 / 1737400.0;
 
-Planet::Planet(int radius)
+Planet::Planet(int radius, bool islead)
 {
 	sf::Color colour;
 
+	if (islead)
+		srand(time(NULL));
+
 	// Planet shape and colour
 	Planet::m_Shape = sf::CircleShape(radius / 5);
-	srand(time(NULL));
 	colour = sf::Color((rand() * 1000) % 255, (rand() * 1000) % 255, (rand() * 1000) % 255);
 	Planet::m_Shape.setFillColor(colour);
 	

@@ -14,5 +14,5 @@ public:
 	sf::Vector2f m_Velocity;
 	float m_Mass;
 public:
-	Planet(int radius);
+	Planet(int radius, bool islead);
 };

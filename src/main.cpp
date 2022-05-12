@@ -1,8 +1,8 @@
+//
 // Created by Ryan Cullen May 11, 2022
 //
 // 
 // Gravity simulation between two moon-like objects
-//
 //
 //
 //
@@ -13,28 +13,31 @@
 #include "planet.hpp"
 
 const float GRAVCONST = 6.67430e-11;
+const int WINDOWWIDTH = 800;
+
 sf::Vector2f accGrav(Planet &first, Planet &second);
 
 // Main game loop and initialization
 int main()
 {
-	sf::RenderWindow window(sf::VideoMode(800, 800), "This Works!");
+	sf::RenderWindow window(sf::VideoMode(WINDOWWIDTH, WINDOWWIDTH), "This Works!");
 	sf::Event event;
 	sf::Sprite background;
 	sf::Texture backTexture;
-	Planet planet1(100);
+
+	Planet planet1(100, true), planet2(150, false);
 	planet1.m_Shape.setPosition(0.f, 0.f);
+	planet2.m_Shape.setPosition(WINDOWWIDTH / 2 - 75, WINDOWWIDTH / 2 - 75);
 
 	// Load background image
 	if (!backTexture.loadFromFile("resource/starry_sky.png"))
 		return 1;
-
 	background.setTexture(backTexture);
+	background.setColor(sf::Color(150, 150, 150)); // darken background image
 	
 	// Game loop
 	while (window.isOpen())
 	{
-		
 		// Event handling
 		while (window.pollEvent(event))
 		{
@@ -54,6 +57,7 @@ int main()
 
 		window.draw(background);
 		window.draw(planet1.m_Shape);
+		window.draw(planet2.m_Shape);
 
 		window.display();
 	}
@@ -73,7 +77,7 @@ sf::Vector2f accGrav(Planet &first, Planet &second)
 	float deltaX = x2 - x1;
 	float y1 = first.m_Shape.getPosition().y - radius1, y2 = second.m_Shape.getPosition().y - radius2;
 	float deltaY = y2 - y1;
-	float r = deltaY / deltaX;
+	float r = sqrt((deltaY * deltaY) + (deltaX * deltaX));
 
 	// calculate direction from origin using components
 	direction = atan(deltaY / deltaX);
