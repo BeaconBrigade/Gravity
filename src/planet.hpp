@@ -6,6 +6,7 @@
 //
 
 #include <SFML/Graphics.hpp>
+const int WINDOWWIDTH = 800;
 
 class Planet
 {
@@ -14,5 +15,6 @@ public:
 	sf::Vector2f m_Velocity;
 	float m_Mass;
 public:
-	Planet(int radius, bool islead);
+	Planet(int radius, bool iscentre);
+	void updatePosition(sf::Vector2f gravity);
 };
