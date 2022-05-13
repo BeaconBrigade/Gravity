@@ -19,7 +19,9 @@ sf::Vector2f accGrav(Planet &first, Planet &second);
 // Main game loop and initialization
 int main()
 {
-	sf::RenderWindow window(sf::VideoMode(WINDOWWIDTH, WINDOWWIDTH), "Gravity Simulation!");
+	sf::ContextSettings settings;
+	settings.antialiasingLevel = 4;
+	sf::RenderWindow window(sf::VideoMode(WINDOWWIDTH, WINDOWWIDTH), "Gravity Simulation!", sf::Style::Default, settings);
 	window.setFramerateLimit(30);
 	sf::Event event;
 	sf::Sprite background;
