@@ -4,7 +4,7 @@ all: $(EXE)
 
 CC = g++
 LIB = -lsfml-graphics -lsfml-window -lsfml-system
-CFLAGS = -g -c -Wall
+CFLAGS = -g -c -Wall -std=c++17
 LFLAGS = 
 
 OBJ = build/*.o
