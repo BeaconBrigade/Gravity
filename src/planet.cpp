@@ -8,7 +8,6 @@
 //
 
 #include "planet.hpp"
-#include <ctime>
 
 // First number is mass of moon in kg and second is 
 // radius of moon in m. Multiply radius to get mass
@@ -21,26 +20,23 @@ Planet::Planet(int radius, bool iscentre)
 	sf::Texture moon;
 	Planet::m_Shape = sf::CircleShape(radius);
 
-	// Planet velocity and postition
+	// Planet velocity, colour and position
 	if (iscentre)
 	{
-		srand(time(NULL));
 		Planet::m_Shape.setPosition(WINDOWWIDTH / 2 - radius, WINDOWWIDTH / 2 - radius);
-		Planet::m_Velocity = sf::Vector2f(100.f, 100.f);
+		Planet::m_Velocity = sf::Vector2f(100.f, 0.f);
+		Planet::m_Shape.setFillColor(sf::Color::Yellow);
 	}
 	else
 	{
 		Planet::m_Shape.setPosition(WINDOWWIDTH / 2 - radius, WINDOWWIDTH / 2 - 300);
 		Planet::m_Velocity = sf::Vector2f(0.f, 0.f);
+		Planet::m_Shape.setFillColor(sf::Color::White);
 	}
 
 	// Planet texture
 	if (!moon.loadFromFile("resource/moon_texture.jpg"))
 		exit(1);
-
-	// Planet colour
-	colour = sf::Color((rand() * 1000) % 255, (rand() * 1000) % 255, (rand() * 1000) % 255);
-	Planet::m_Shape.setFillColor(colour);
 	Planet::m_Shape.setOutlineColor(sf::Color(0, 0, 0));
 	Planet::m_Shape.setOutlineThickness(2.f);
 	Planet::m_Shape.setTexture(&moon);
