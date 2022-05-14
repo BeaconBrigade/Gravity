@@ -23,7 +23,7 @@ int main()
 	sf::ContextSettings settings;
 	settings.antialiasingLevel = 4;
 	sf::RenderWindow window(sf::VideoMode(WINDOWWIDTH, WINDOWWIDTH), "Gravity Simulation!", sf::Style::Default, settings);
-	window.setFramerateLimit(30);
+	window.setFramerateLimit(60);
 	sf::Event event;
 	sf::Sprite background;
 	sf::Texture backTexture;
@@ -98,14 +98,12 @@ sf::Vector2f accGrav(Planet &first, Planet &second)
 
 	// calculate acceleration due to gravity using Newton's law of universal gravitation
 	magnitude = GRAVCONST * ((first.m_Mass * second.m_Mass) / (r * r));
-	std::cout << "Dist aprt = " << magnitude << ", direction = " << direction * (180 / M_PI) << '\n';
 
 	// convert magnitude back to components
 	accX = cos(direction) * magnitude;
 	accY = sin(direction) * magnitude;
 
 	acceleration = sf::Vector2f(accX, accY);
-	std::cout << "Gravity: x = " << accX << ", y = " << accY << '\n';
 	return acceleration;
 }
 
