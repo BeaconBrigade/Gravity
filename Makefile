@@ -13,7 +13,7 @@ SRC = src/*.cpp
 $(EXE): $(OBJ)
 	$(CC) -o $(EXE) $(OBJ) $(LFLAGS) $(LIB)
 
-$(OBJ): $(SRC)
+$(OBJ): $(SRC) src/planet.hpp
 	$(CC) $(CFLAGS) $(SRC)
 	mv *.o build/
 
