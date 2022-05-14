@@ -53,6 +53,7 @@ int main()
 				break;
 			}
 		}
+
 		// Update sprite postions
 		if (!isCollided)
 		{
@@ -97,6 +98,7 @@ sf::Vector2f accGrav(Planet &first, Planet &second)
 
 	// calculate acceleration due to gravity using Newton's law of universal gravitation
 	magnitude = GRAVCONST * ((first.m_Mass * second.m_Mass) / (r * r));
+	std::cout << "Dist aprt = " << magnitude << ", direction = " << direction * (180 / M_PI) << '\n';
 
 	// convert magnitude back to components
 	accX = cos(direction) * magnitude;
@@ -116,7 +118,7 @@ float distanceApart(sf::Vector2f first, sf::Vector2f second, int radius1, int ra
 	float deltaY = (y2 - y1);
 
 	// calculate direction
-	*direction = atan(deltaY / deltaX);
+	*direction = atan2(deltaY, deltaX);
 
 	return sqrt((deltaY * deltaY) + (deltaX * deltaX));
 }
