@@ -14,7 +14,7 @@
 // of moon-like object. aka, this is kg/m
 const double MOON_MASS_TO_RADIUS = 7.34767309e14 / 1737400.0;
 
-Planet::Planet(int radius, bool iscentre)
+Planet::Planet(float radius, bool iscentre)
 {
 	sf::Color colour;
 	sf::Texture moon;
@@ -24,13 +24,13 @@ Planet::Planet(int radius, bool iscentre)
 	if (iscentre)
 	{
 		Planet::m_Shape.setPosition(WINDOWWIDTH / 2 - radius, WINDOWWIDTH / 2 - radius);
-		Planet::m_Velocity = sf::Vector2f(0.f, 0.f);
+		Planet::m_Velocity = sf::Vector2f(-0.7f, 0.f);
 		Planet::m_Shape.setFillColor(sf::Color::Yellow);
-	}
+	}planet1.m_Shape.getRadius() + planet2.m_Shape.getRadius()
 	else
 	{
-		Planet::m_Shape.setPosition(WINDOWWIDTH / 2 - radius, WINDOWWIDTH / 2 - 300);
-		Planet::m_Velocity = sf::Vector2f(6.4f, 0.f);
+		Planet::m_Shape.setPosition(WINDOWWIDTH / 2 - radius, WINDOWWIDTH / 2 - 50);
+		Planet::m_Velocity = sf::Vector2f(1.4f, 0.f);
 		Planet::m_Shape.setFillColor(sf::Color::White);
 	}
 

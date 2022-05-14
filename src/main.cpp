@@ -30,7 +30,7 @@ int main()
 	sf::Vector2f gravity;
 	int dist;
 	bool isCollided = false;
-	Planet planet1(100, true), planet2(35, false);
+	Planet planet1(10, true), planet2(3.5f, false);
 
 	// Load background image
 	if (!backTexture.loadFromFile("resource/starry_sky.png"))
@@ -58,6 +58,7 @@ int main()
 		if (!isCollided)
 		{
 			gravity = accGrav(planet1, planet2);
+			planet1.updatePosition(0.5f * gravity);
 			planet2.updatePosition(-1.f * gravity);
 		}
 
@@ -67,7 +68,7 @@ int main()
 		
 		dist = distanceApart(planet1.m_Shape.getPosition(), planet2.m_Shape.getPosition(), planet1.m_Shape.getRadius(), planet2.m_Shape.getRadius(), skip);
 
-		if (dist < 130)
+		if (dist < (planet1.m_Shape.getRadius() + planet2.m_Shape.getRadius()))
 		{
 			// BOOM!!
 			isCollided = true;

@@ -15,6 +15,6 @@ public:
 	sf::Vector2f m_Velocity;
 	float m_Mass;
 public:
-	Planet(int radius, bool iscentre);
+	Planet(float radius, bool iscentre);
 	void updatePosition(sf::Vector2f gravity);
 };
