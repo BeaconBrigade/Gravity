@@ -9,7 +9,7 @@
 
 #include "planet.hpp"
 
-// First number is mass of moon (over 10^9) in kg and second is 
+// First number is mass of moon (div 10^8) in kg and second is 
 // radius of moon in m. Multiply radius to get mass
 // of moon-like object. aka, this is kg/m
 const double MOON_MASS_TO_RADIUS = 7.34767309e14 / 1737400.0;
@@ -30,7 +30,7 @@ Planet::Planet(int radius, bool iscentre)
 	else
 	{
 		Planet::m_Shape.setPosition(WINDOWWIDTH / 2 - radius, WINDOWWIDTH / 2 - 300);
-		Planet::m_Velocity = sf::Vector2f(5.f, 0.f);
+		Planet::m_Velocity = sf::Vector2f(6.4f, 0.f);
 		Planet::m_Shape.setFillColor(sf::Color::White);
 	}
 

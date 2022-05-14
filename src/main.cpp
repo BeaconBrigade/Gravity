@@ -23,15 +23,14 @@ int main()
 	sf::ContextSettings settings;
 	settings.antialiasingLevel = 4;
 	sf::RenderWindow window(sf::VideoMode(WINDOWWIDTH, WINDOWWIDTH), "Gravity Simulation!", sf::Style::Default, settings);
-	window.setFramerateLimit(10);
+	window.setFramerateLimit(30);
 	sf::Event event;
 	sf::Sprite background;
 	sf::Texture backTexture;
 	sf::Vector2f gravity;
-	int radiusSum, dist;
+	int dist;
 	bool isCollided = false;
-
-	Planet planet1(100, true), planet2(30, false);
+	Planet planet1(100, true), planet2(35, false);
 
 	// Load background image
 	if (!backTexture.loadFromFile("resource/starry_sky.png"))
@@ -62,11 +61,12 @@ int main()
 		}
 
 		// Check for planet collisions
-		float unimportant = 0.f;
+		float unimportant = 0.f; // store values nowhere
 		float *skip = &unimportant;
-		radiusSum = abs(planet1.m_Shape.getRadius()) + abs(planet2.m_Shape.getRadius());
+		
 		dist = distanceApart(planet1.m_Shape.getPosition(), planet2.m_Shape.getPosition(), planet1.m_Shape.getRadius(), planet2.m_Shape.getRadius(), skip);
-		if (radiusSum > dist)
+
+		if (dist < 130)
 		{
 			// BOOM!!
 			isCollided = true;
@@ -110,9 +110,9 @@ sf::Vector2f accGrav(Planet &first, Planet &second)
 // Calculate distance between two points
 float distanceApart(sf::Vector2f first, sf::Vector2f second, int radius1, int radius2, float *direction)
 {
-	float x1 = first.x - radius1, x2 = second.x - radius2;
+	float x1 = first.x + radius1, x2 = second.x + radius2;
 	float deltaX = (x2 - x1);
-	float y1 = first.y - radius1, y2 = second.y - radius2;
+	float y1 = first.y + radius1, y2 = second.y + radius2;
 	float deltaY = (y2 - y1);
 
 	// calculate direction
