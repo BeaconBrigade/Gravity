@@ -1,7 +1,7 @@
 //
 // Created by Ryan Cullen May 11, 2022
 //
-// 
+//
 // Gravity simulation between two moon-like objects
 //
 //
@@ -38,7 +38,7 @@ int main()
 		return 1;
 	background.setTexture(backTexture);
 	background.setColor(sf::Color(150, 150, 150)); // darken background image
-	
+
 	// Game loop
 	while (window.isOpen())
 	{
@@ -47,13 +47,12 @@ int main()
 		{
 			switch (event.type)
 			{
-				case sf::Event::Closed :
-					window.close();
-					break;
-				default :
-					break;
+			case sf::Event::Closed:
+				window.close();
+				break;
+			default:
+				break;
 			}
-
 		}
 		// Update sprite postions
 		if (!isCollided)
@@ -82,7 +81,7 @@ int main()
 
 		window.display();
 	}
-	
+
 	return 0;
 }
 
@@ -91,11 +90,11 @@ sf::Vector2f accGrav(Planet &first, Planet &second)
 {
 	sf::Vector2f acceleration;
 	float magnitude, direction, accX, accY;
-	
+
 	// calculate distance between two points (components)
 	float radius1 = first.m_Shape.getRadius(), radius2 = second.m_Shape.getRadius();
 	float r = distanceApart(first.m_Shape.getPosition(), second.m_Shape.getPosition(), radius1, radius2, &direction) * 10000.f;
-	
+
 	// calculate acceleration due to gravity using Newton's law of universal gravitation
 	magnitude = GRAVCONST * ((first.m_Mass * second.m_Mass) / (r * r));
 
@@ -121,8 +120,3 @@ float distanceApart(sf::Vector2f first, sf::Vector2f second, int radius1, int ra
 
 	return sqrt((deltaY * deltaY) + (deltaX * deltaX));
 }
-
-
-
-
-

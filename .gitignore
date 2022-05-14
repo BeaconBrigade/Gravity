@@ -1,5 +1,5 @@
 # Ignore all object files
 
-build/*
+*.o
 
 gravity-app
