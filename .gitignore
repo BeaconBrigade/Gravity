@@ -3,3 +3,6 @@
 *.o
 
 gravity-app
+sfml
+build/*.o
+build/gravity-app*
