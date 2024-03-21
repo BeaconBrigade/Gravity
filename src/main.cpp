@@ -14,7 +14,7 @@
 
 const float GRAVCONST = 6.67430e-11;
 
-sf::Vector2f accGrav(Planet &first, Planet &second);
+sf::Vector2f forceOfGravity(Planet &first, Planet &second);
 float distanceApart(sf::Vector2f, sf::Vector2f, int, int, float *);
 
 // Main game loop and initialization
@@ -30,7 +30,7 @@ int main()
 	sf::Vector2f gravity;
 	int dist;
 	bool isCollided = false;
-	Planet planet1(10, true), planet2(3.5f, false);
+	Planet planet1(20.0, true), planet2(3.5f, false);
 
 	// Load background image
 	if (!backTexture.loadFromFile("resource/starry_sky.png"))
@@ -57,15 +57,15 @@ int main()
 		// Update sprite postions
 		if (!isCollided)
 		{
-			gravity = accGrav(planet1, planet2);
-			planet1.updatePosition(0.5f * gravity);
-			planet2.updatePosition(-1.f * gravity);
+			gravity = forceOfGravity(planet1, planet2);
+			planet1.updatePosition(gravity);
+			planet2.updatePosition(-gravity);
 		}
 
 		// Check for planet collisions
 		float unimportant = 0.f; // store values nowhere
 		float *skip = &unimportant;
-		
+
 		dist = distanceApart(planet1.m_Shape.getPosition(), planet2.m_Shape.getPosition(), planet1.m_Shape.getRadius(), planet2.m_Shape.getRadius(), skip);
 
 		if (dist < (planet1.m_Shape.getRadius() + planet2.m_Shape.getRadius()))
@@ -87,34 +87,32 @@ int main()
 	return 0;
 }
 
-// Calculate acceleration due to gravity using a = G(m1*m2)/r^2
-sf::Vector2f accGrav(Planet &first, Planet &second)
+// Calculate force of gravity with Fg = G(m1*m2)/r^2
+sf::Vector2f forceOfGravity(Planet &first, Planet &second)
 {
-	sf::Vector2f acceleration;
-	float magnitude, direction, accX, accY;
+	sf::Vector2f force;
+	float magnitude, direction, fx, fy;
 
 	// calculate distance between two points (components)
 	float radius1 = first.m_Shape.getRadius(), radius2 = second.m_Shape.getRadius();
-	float r = distanceApart(first.m_Shape.getPosition(), second.m_Shape.getPosition(), radius1, radius2, &direction) * 10000.f;
+	float r = distanceApart(first.m_Shape.getPosition(), second.m_Shape.getPosition(), radius1, radius2, &direction);
 
-	// calculate acceleration due to gravity using Newton's law of universal gravitation
+	// calculate force using Newton's law of universal gravitation
 	magnitude = GRAVCONST * ((first.m_Mass * second.m_Mass) / (r * r));
 
 	// convert magnitude back to components
-	accX = cos(direction) * magnitude;
-	accY = sin(direction) * magnitude;
+	fx = cos(direction) * magnitude;
+	fy = sin(direction) * magnitude;
 
-	acceleration = sf::Vector2f(accX, accY);
-	return acceleration;
+	force = sf::Vector2f(fx, fy);
+	return force;
 }
 
 // Calculate distance between two points
 float distanceApart(sf::Vector2f first, sf::Vector2f second, int radius1, int radius2, float *direction)
 {
-	float x1 = first.x + radius1, x2 = second.x + radius2;
-	float deltaX = (x2 - x1);
-	float y1 = first.y + radius1, y2 = second.y + radius2;
-	float deltaY = (y2 - y1);
+	float deltaX = second.x - first.x;
+	float deltaY = second.y - first.y;
 
 	// calculate direction
 	*direction = atan2(deltaY, deltaX);
